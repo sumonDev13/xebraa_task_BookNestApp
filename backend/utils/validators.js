@@ -46,9 +46,29 @@ const validateEmail = (email) => {
   
     return null;
   };
+
+  const validateAnalyticsParams = (params) => {
+    const { genre, limit, minBooks } = params;
+  
+    if (genre && typeof genre !== 'string') {
+      return 'Genre must be a string';
+    }
+  
+    if (limit && (isNaN(limit) || limit < 1 || limit > 100)) {
+      return 'Limit must be a number between 1 and 100';
+    }
+  
+    if (minBooks && (isNaN(minBooks) || minBooks < 1)) {
+      return 'Minimum books count must be a positive number';
+    }
+  
+    return null;
+  };
+  
   
   module.exports = {
     validateBook,
     validateSearchParams,
-    validateEmail
+    validateEmail,
+    validateAnalyticsParams
   };
