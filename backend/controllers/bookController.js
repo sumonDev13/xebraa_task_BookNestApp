@@ -33,6 +33,19 @@ const addBook = async (req, res, next) => {
   }
 };
 
+//getAllBooks
+const getAllBooks = async (req, res, next) => {
+  try {
+    const books = await Book.find();
+    res.status(200).json({
+      success: true,
+      data: books
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const searchBooks = async (req, res, next) => {
   try {
     const searchParams = req.query;
@@ -142,5 +155,6 @@ module.exports = {
   addBook,
   searchBooks,
   getAveragePriceByGenre,
-  getPopularAuthors
+  getPopularAuthors,
+  getAllBooks
 };
