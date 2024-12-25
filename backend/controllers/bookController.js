@@ -3,12 +3,12 @@ const { createError } = require('../utils/errorHandler');
 const { validateBook, validateSearchParams, validateAnalyticsParams } = require('../utils/validators');
 const { buildSearchQuery, buildPaginationOptions } = require('../utils/queryBuilder');
 const { buildAggregationPipeline } = require('../utils/aggregationBuilder');
+const {createNotification} = require('../services/notificationService');
 
 const addBook = async (req, res, next) => {
   try {
     const bookData = req.body;
     
-    // Validate book data
     const validationError = validateBook(bookData);
     if (validationError) {
       throw createError(400, validationError);
@@ -16,6 +16,12 @@ const addBook = async (req, res, next) => {
 
     const book = new Book(bookData);
     await book.save();
+
+    // Emit socket event for new book
+    const io = req.app.get('io');
+    const notification = createNotification('BOOK_ADDED', book);
+    io.emit('notification', notification);
+    console.log(notification,'notification');
 
     res.status(201).json({
       success: true,
