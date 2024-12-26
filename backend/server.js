@@ -6,6 +6,7 @@ const connectDB = require('./config/dbConnection');
 const authRoutes = require('./routes/auth');
 const booksRoutes = require('./routes/book');
 const socketHandlers = require('./socket/handlers');
+const cors = require("cors");
 
 
 dotenv.config();
@@ -33,6 +34,7 @@ io.on('connection', (socket) => {
 app.set('io', io);
 
 // Routes
+app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/books', booksRoutes);
 
