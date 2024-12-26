@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { bookService } from '@/utils/api/book';
 import { Book } from '@/types/book';
+import { redirect } from 'next/navigation';
 const GENRES = [
   'Fiction', 'Non-Fiction', 'Science Fiction', 
   'Fantasy', 'Mystery', 'Romance', 'Biography'
@@ -40,6 +41,7 @@ const AddBookForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     addBookMutation.mutate(bookData);
+    redirect('/')
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {

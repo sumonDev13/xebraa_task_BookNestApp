@@ -6,7 +6,8 @@ import { bookService } from '@/utils/api/book';
 import BookList from '@/components/BookList';
 import BookSearchForm from '@/components/BookSearchForm';
 import { BookSearchParams } from '@/types/book';
-import AddBookForm from '@/components/AddBookForm';
+import { Button } from '@/components/ui/Button';
+import Link from 'next/link';
 
 export default function BookCatalogPage() {
   const [searchParams, setSearchParams] = useState<BookSearchParams>({
@@ -26,8 +27,8 @@ export default function BookCatalogPage() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Book Catalog</h1>
-      <AddBookForm/>
       
+     <Link href="/books/add"><Button>Add Book</Button></Link>
       <BookSearchForm onSearch={handleSearch} />
       
       {isLoading ? (
