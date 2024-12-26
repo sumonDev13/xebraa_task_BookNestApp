@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios  from 'axios';
 import { RegisterData, LoginData, AuthResponse } from '@/types/auth';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;

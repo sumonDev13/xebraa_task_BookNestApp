@@ -13,6 +13,7 @@ export interface RegisterData {
   }
   
   export interface AuthResponse {
+    AxiosError?: any;
     success: boolean;
     message: string;
     token?: string;
