@@ -5,6 +5,8 @@ import { useMutation } from '@tanstack/react-query';
 import { bookService } from '@/utils/api/book';
 import { Book } from '@/types/book';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
+import { Button } from './ui/Button';
 const GENRES = [
   'Fiction', 'Non-Fiction', 'Science Fiction', 
   'Fantasy', 'Mystery', 'Romance', 'Biography'
@@ -54,6 +56,7 @@ const AddBookForm: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <Link href='/'><Button className="mb-4">Go Back</Button></Link>
       <h2 className="text-2xl mb-4 font-bold text-center">Add New Book</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
