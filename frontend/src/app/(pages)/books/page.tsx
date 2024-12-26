@@ -26,9 +26,10 @@ export default function BookCatalogPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Book Catalog</h1>
+      <h1 className="text-4xl font-bold mb-4 justify-center text-center">Book Catalog</h1>
       
      <Link href="/books/add"><Button>Add Book</Button></Link>
+
       <BookSearchForm onSearch={handleSearch} />
       
       {isLoading ? (

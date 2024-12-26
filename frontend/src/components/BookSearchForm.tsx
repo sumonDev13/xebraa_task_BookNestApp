@@ -14,7 +14,7 @@ const BookSearchForm: React.FC<BookSearchFormProps> = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4 flex space-x-2">
+    <form onSubmit={handleSubmit} className="mb-4 flex space-x-2 py-2">
       <input
         type="text"
         placeholder="Title"
