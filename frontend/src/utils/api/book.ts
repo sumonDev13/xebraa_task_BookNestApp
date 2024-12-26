@@ -17,5 +17,10 @@ export const bookService = {
   getAveragePriceByGenre: async (genre: string) => {
     const response = await axios.get(`${API_BASE_URL}/average-price`, { params: { genre } });
     return response.data.data;
+  },
+
+  getPopularAuthors: async () => {
+    const response = await axios.get(`${API_BASE_URL}/popular-authors`);
+    return response.data.data;
   }
 };

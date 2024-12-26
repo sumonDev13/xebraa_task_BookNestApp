@@ -9,12 +9,15 @@ export interface Book {
   
   export interface BookSearchParams {
     title?: string;
-    author?: string;
-    genre?: string;
-    minPrice?: number;
-    maxPrice?: number;
     page?: number;
-    limit?: number;
+  limit?: number;
+  search?: string;
+  genre?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  authors?: string[];
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
   }
   
   export interface PaginationMeta {
