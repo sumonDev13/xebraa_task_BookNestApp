@@ -9,6 +9,7 @@ import BookFilters from '@/components/BookFilters';
 import { BookSearchParams } from '@/types/book';
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
+import NotificationCenter from '@/components/NotificationCenter';
 
 export default function BookCatalogPage() {
   const [searchParams, setSearchParams] = useState<BookSearchParams>({
@@ -72,6 +73,8 @@ export default function BookCatalogPage() {
   };
 
   return (
+    <>
+    <NotificationCenter/>
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-bold">Book Catalog</h1>
@@ -141,5 +144,6 @@ export default function BookCatalogPage() {
         />
       )}
     </div>
+    </>
   );
 }

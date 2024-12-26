@@ -1,12 +1,12 @@
 "use client"
-import NotificationCenter from "@/components/NotificationCenter";
-import BookCatalogPage from "./(pages)/books/page";
+
+import RegisterPage from "./(pages)/register/page";
+
 
 export default function Home() {
   return (
     <>
-      <NotificationCenter />
-      <BookCatalogPage/>
+      <RegisterPage/>
     </>
   );
 }
