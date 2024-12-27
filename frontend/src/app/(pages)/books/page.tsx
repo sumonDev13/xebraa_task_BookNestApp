@@ -23,18 +23,6 @@ export default function BookCatalogPage() {
     queryFn: () => bookService.searchBooks(searchParams)
   });
 
-  // Fetch average price by genre query
-  const averagePriceQuery = useQuery({
-    queryKey: ['averagePrice', searchParams.genre],
-    queryFn: () => bookService.getAveragePriceByGenre(searchParams.genre || ''),
-    enabled: !!searchParams.genre
-  });
-
-  // Fetch popular authors query
-  const popularAuthorsQuery = useQuery({
-    queryKey: ['popularAuthors'],
-    queryFn: () => bookService.getPopularAuthors()
-  });
 
   // Handle search form submission
   const handleSearch = (params: BookSearchParams) => {
@@ -92,7 +80,7 @@ export default function BookCatalogPage() {
           <Button 
             variant="primary" 
             onClick={handleClearFilters}
-            className="w-full"
+            className="w-fit float-end"
           >
             Clear Filters
           </Button>
@@ -102,12 +90,12 @@ export default function BookCatalogPage() {
       {/* Book Filters Component */}
       <BookFilters 
         onAveragePriceFilter={handleAveragePriceFilter}
-        onPopularAuthorsFilter={handlePopularAuthorsFilter}
       />
+
 
       {/* Displaying Current Filters */}
       {(searchParams.genre || searchParams.authors?.length) && (
-        <div className="bg-gray-100 p-3 rounded-md mb-4">
+        <div className="bg-gray-100 p-3 rounded-md mb-4 w-fit">
           <h3 className="font-semibold mb-2">Current Filters:</h3>
           <div className="flex flex-wrap gap-2">
             {searchParams.genre && (
@@ -128,7 +116,7 @@ export default function BookCatalogPage() {
           </div>
         </div>
       )}
-
+    
       {/* Book List Rendering */}
       {isLoading ? (
         <div className="text-center py-6">Loading books...</div>

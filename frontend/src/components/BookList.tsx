@@ -13,11 +13,11 @@ const BookList: React.FC<BookListProps> = ({
   onPageChange 
 }) => {
   return (
-    <div>
+      <div className='book-list'>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {books.map((book) => (
           <div 
-            key={book._id} 
+            key={book.id} 
             className="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow"
           >
             <h2 className="text-xl font-bold mb-2">{book.title}</h2>
@@ -55,7 +55,7 @@ const BookList: React.FC<BookListProps> = ({
           </button>
         </div>
       )}
-    </div>
+      </div>
   );
 };
 
