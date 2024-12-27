@@ -43,7 +43,7 @@ const AddBookForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     addBookMutation.mutate(bookData);
-    redirect('/')
+    redirect('/books')
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
