@@ -10,6 +10,7 @@ import { BookSearchParams } from '@/types/book';
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 import NotificationCenter from '@/components/NotificationCenter';
+import { PopularAuthorsSection } from '@/components/PopularAuthors';
 
 export default function BookCatalogPage() {
   const [searchParams, setSearchParams] = useState<BookSearchParams>({
@@ -22,6 +23,9 @@ export default function BookCatalogPage() {
     queryKey: ['books', searchParams],
     queryFn: () => bookService.searchBooks(searchParams)
   });
+
+  const [showPopularBooks, setShowPopularBooks] = useState(false);
+
 
 
   // Handle search form submission
@@ -69,6 +73,12 @@ export default function BookCatalogPage() {
         <Link href="/books/add">
           <Button>Add Book</Button>
         </Link>
+        <Button 
+              variant="secondary"
+              onClick={() => setShowPopularBooks(!showPopularBooks)}
+            >
+              {showPopularBooks ? 'Hide Popular Books' : 'Show Popular Books by Author'}
+            </Button>
       </div>
 
       {/* Search and Filtering Section */}
@@ -116,6 +126,11 @@ export default function BookCatalogPage() {
           </div>
         </div>
       )}
+            {showPopularBooks && (
+          <div className="mt-8">
+            <PopularAuthorsSection />
+          </div>
+        )}
     
       {/* Book List Rendering */}
       {isLoading ? (
