@@ -24,7 +24,7 @@ const createMailOptions = (email, token) => ({
   html: `
     <h1>Login to Your Account</h1>
     <p>Click the link below to login (valid for 15 minutes):</p>
-    <a href="${process.env.FRONTEND_URL}/auth/verify/${token}">Login to Your Account</a>
+    <a href="${process.env.FRONTEND_URL}/verify/${token}">Login to Your Account</a>
     <p>If you didn't request this, please ignore this email.</p>
   `
 });

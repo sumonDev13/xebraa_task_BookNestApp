@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SocketProvider } from "@/contexts/SocketContext";
+import QueryProvider from "@/providers/QueryProvider";
+import NotificationC from "@/components/NoteCenter";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,13 +29,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <QueryProvider>
       <SocketProvider>
+        <AuthProvider>
+          <Toaster />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <NotificationC/>
         {children}
       </body>
+      </AuthProvider>
       </SocketProvider>
+      </QueryProvider>
     </html>
   );
 }

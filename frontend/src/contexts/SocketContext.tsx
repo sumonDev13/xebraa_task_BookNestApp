@@ -1,7 +1,8 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import { io, Socket } from 'socket.io-client';
+import { Socket as SocketType } from 'socket.io-client';
 import { Notification, SocketContextType } from '../types/socket.types';
+import { io } from "socket.io-client";
 
 const SocketContext = createContext<SocketContextType | undefined>(undefined);
 
@@ -10,12 +11,12 @@ interface SocketProviderProps {
 }
 
 export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
-  const [socket, setSocket] = useState<Socket.Socket | null>(null);
+  const [socket, setSocket] = useState<typeof SocketType | null>(null);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    const socketInstance = io(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000', {
+    const socketInstance = io(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5000/', {
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,
     });

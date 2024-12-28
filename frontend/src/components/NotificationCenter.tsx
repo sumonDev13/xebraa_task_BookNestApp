@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import { Bell, X, WifiOff } from 'lucide-react';
 import { useSocket } from '../contexts/SocketContext';
@@ -24,7 +25,7 @@ const NotificationCenter: React.FC = () => {
   const unreadCount = notifications.length;
 
   return (
-    <div className="relative">
+    <div className="relative p-2">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 rounded-full hover:bg-gray-100 relative transition-colors"

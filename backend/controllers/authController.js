@@ -45,7 +45,8 @@ const requestMagicLink = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: 'Magic link sent successfully'
+      message: 'Magic link sent successfully',
+      data:user
     });
   } catch (error) {
     next(error);
