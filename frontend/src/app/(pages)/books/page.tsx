@@ -12,6 +12,7 @@ import Link from 'next/link';
 import NotificationCenter from '@/components/NotificationCenter';
 import { PopularAuthorsSection } from '@/components/PopularAuthors';
 import { useAuth } from '@/contexts/AuthContext';
+import { redirect } from 'next/navigation';
 
 export default function BookCatalogPage() {
   const [searchParams, setSearchParams] = useState<BookSearchParams>({
@@ -27,6 +28,10 @@ export default function BookCatalogPage() {
 
   const handleLogout = () => {
     clearAuth();
+  };
+
+  const handleLogin = () => {
+    redirect('/login');
   };
 
   // Fetch books with current search and filter parameters
@@ -81,6 +86,23 @@ export default function BookCatalogPage() {
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-bold">Book Catalog</h1>
+        { token? (
+          <Button 
+            variant="secondary" 
+            onClick={handleLogout}
+            className="w-fit float-end"
+          >
+            Logout
+          </Button>
+        ) : (
+          <Button 
+            variant="primary" 
+            onClick={handleLogin}
+            className="w-fit float-end"
+          >
+            Login
+          </Button>
+        )}
         <Link href="/books/add">
         <button
       className={`p-2 ${token ? 'bg-green-500' : 'bg-gray-300 cursor-not-allowed'} text-white rounded`}
