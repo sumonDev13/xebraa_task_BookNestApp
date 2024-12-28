@@ -1,62 +1,83 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { bookService } from '@/utils/api/book';
-import { Book } from '@/types/book';
-import { redirect } from 'next/navigation';
-import Link from 'next/link';
-import { Button } from './ui/Button';
+import React, { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { Book } from "@/types/book";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import { Button } from "./ui/Button";
+import axios from "axios";
+import { useAuth } from "@/contexts/AuthContext";
+
 const GENRES = [
-  'Fiction', 'Non-Fiction', 'Science Fiction', 
-  'Fantasy', 'Mystery', 'Romance', 'Biography'
+  "Fiction",
+  "Non-Fiction",
+  "Science Fiction",
+  "Fantasy",
+  "Mystery",
+  "Romance",
+  "Biography",
 ];
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const AddBookForm: React.FC = () => {
   const [bookData, setBookData] = useState({
-    title: '',
-    author: '',
-    genre: '',
+    title: "",
+    author: "",
+    genre: "",
     price: 0,
-    description: ''
+    description: "",
   });
 
+  const { token } = useAuth();
+
   const addBookMutation = useMutation({
-    mutationFn: bookService.addBook,
-    onSuccess: (newBook) => {
-      // Reset form
-      setBookData({
-        title: '',
-        author: '',
-        genre: '',
-        price: 0,
-        description: ''
+    mutationFn: async (data: Partial<Book>) => {
+      const response = await axios.post(`${API_BASE_URL}/books/add`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-      // Optionally show success toast or notification
+      return response.data.data;
+    },
+    onSuccess: (newBook) => {
+      setBookData({
+        title: "",
+        author: "",
+        genre: "",
+        price: 0,
+        description: "",
+      });
     },
     onError: (error) => {
-      console.error('Failed to add book', error);
-      // Handle error (show error message)
-    }
+      console.error("Failed to add book", error);
+    },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     addBookMutation.mutate(bookData);
-    redirect('/books')
+    redirect("/");
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setBookData(prev => ({
+    setBookData((prev) => ({
       ...prev,
-      [name]: name === 'price' ? parseFloat(value) : value
+      [name]: name === "price" ? parseFloat(value) : value,
     }));
   };
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <Link href='/books'><Button className="mb-4">Go Back</Button></Link>
+      <Link href="/books">
+        <Button className="mb-4">Go Back</Button>
+      </Link>
       <h2 className="text-2xl mb-4 font-bold text-center">Add New Book</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -98,8 +119,10 @@ const AddBookForm: React.FC = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             >
               <option value="">Select Genre</option>
-              {GENRES.map(genre => (
-                <option key={genre} value={genre}>{genre}</option>
+              {GENRES.map((genre) => (
+                <option key={genre} value={genre}>
+                  {genre}
+                </option>
               ))}
             </select>
           </label>
@@ -127,7 +150,7 @@ const AddBookForm: React.FC = () => {
             disabled={addBookMutation.isPending}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50"
           >
-            {addBookMutation.isPending ? 'Adding...' : 'Add Book'}
+            {addBookMutation.isPending ? "Adding..." : "Add Book"}
           </button>
         </div>
       </form>
