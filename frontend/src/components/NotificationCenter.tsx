@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from 'react';
 import { Bell, X, WifiOff } from 'lucide-react';
 import { useSocket } from '../contexts/SocketContext';

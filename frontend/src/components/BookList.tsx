@@ -25,7 +25,7 @@ const BookList: React.FC<BookListProps> = ({
             <p className="text-gray-600 mb-1">Author: {book.author}</p>
             <p className="text-gray-600 mb-1">Genre: {book.genre}</p>
             <p className="text-blue-600 font-semibold">
-              Price: \${book.price.toFixed(2)}
+              Price: ${book.price.toFixed(2)}
             </p>
           </div>
         ))}
