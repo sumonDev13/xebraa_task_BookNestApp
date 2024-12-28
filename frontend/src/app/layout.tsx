@@ -4,6 +4,7 @@ import "./globals.css";
 import { SocketProvider } from "@/contexts/SocketContext";
 import QueryProvider from "@/providers/QueryProvider";
 import NotificationC from "@/components/NoteCenter";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,12 +30,14 @@ export default function RootLayout({
     <html lang="en">
       <QueryProvider>
       <SocketProvider>
+        <AuthProvider>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NotificationC/>
         {children}
       </body>
+      </AuthProvider>
       </SocketProvider>
       </QueryProvider>
     </html>

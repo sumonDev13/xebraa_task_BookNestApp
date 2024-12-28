@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { bookService } from '@/utils/api/book';
 import BookList from '@/components/BookList';
@@ -11,12 +11,23 @@ import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 import NotificationCenter from '@/components/NotificationCenter';
 import { PopularAuthorsSection } from '@/components/PopularAuthors';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function BookCatalogPage() {
   const [searchParams, setSearchParams] = useState<BookSearchParams>({
     page: 1,
     limit: 10
   });
+
+  const { token,clearAuth } = useAuth();
+  
+  useEffect(() => {
+    console.log('Token:', token); // Log the token to check its value
+  }, [token]);
+
+  const handleLogout = () => {
+    clearAuth();
+  };
 
   // Fetch books with current search and filter parameters
   const { data, isLoading, error, refetch } = useQuery({
@@ -71,7 +82,12 @@ export default function BookCatalogPage() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-bold">Book Catalog</h1>
         <Link href="/books/add">
-          <Button>Add Book</Button>
+        <button
+      className={`p-2 ${token ? 'bg-green-500' : 'bg-gray-300 cursor-not-allowed'} text-white rounded`}
+      disabled={!token}
+    >
+      Add Book
+    </button>
         </Link>
         <Button 
               variant="secondary"
