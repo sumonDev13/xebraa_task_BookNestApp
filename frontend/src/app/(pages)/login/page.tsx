@@ -9,6 +9,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const { setAuth } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,9 +47,10 @@ export default function LoginPage() {
         className="p-2 border border-gray-300 rounded"
         required
       />
-      <button type="submit" className="p-2 bg-blue-500 text-white rounded">
-        Send Magic Link
-      </button>
+      <Button type="submit" className="w-full mt-4" disabled={loading}>
+      {loading ? 'Sending Magic Link...' : 'Send'}
+      </Button>
+      <p> If you don't have an account, please  <a className='text-blue-500' href="/register">register</a> here</p>
     </form>
       </div>
     </div>

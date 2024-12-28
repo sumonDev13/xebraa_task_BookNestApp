@@ -1,12 +1,10 @@
 "use client"
-
-import RegisterPage from "./(pages)/register/page";
-
+import BookCatalogPage from "./(pages)/books/page";
 
 export default function Home() {
   return (
     <>
-      <RegisterPage/>
+      <BookCatalogPage/>
     </>
   );
 }

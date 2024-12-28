@@ -39,7 +39,7 @@ export const useAuth = () => {
       // Store token in localStorage or secure cookie
       localStorage.setItem('token', response.token || '');
       toast.success(response.message);
-      router.push('/books');
+      router.push('/');
     } catch (error: any) {
       toast.error(error.message);
       router.push('/login');
