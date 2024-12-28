@@ -5,6 +5,7 @@ import { SocketProvider } from "@/contexts/SocketContext";
 import QueryProvider from "@/providers/QueryProvider";
 import NotificationC from "@/components/NoteCenter";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
       <QueryProvider>
       <SocketProvider>
         <AuthProvider>
+          <Toaster />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

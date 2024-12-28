@@ -20,7 +20,7 @@ export const useAuth = () => {
     }
   };
 
-  const requestMagicLink = async (email: string) => {
+  const requestMagicLink = async (email: string,token: string) => {
     setLoading(true);
     try {
       const response = await authService.requestMagicLink({ email });
