@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation,useQueryClient } from "@tanstack/react-query";
 import { Book } from "@/types/book";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -21,6 +21,7 @@ const GENRES = [
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
+
 const AddBookForm: React.FC = () => {
   const [bookData, setBookData] = useState({
     title: "",
@@ -29,7 +30,7 @@ const AddBookForm: React.FC = () => {
     price: 0,
     description: "",
   });
-
+  const queryClient = useQueryClient();
   const { token } = useAuth();
 
   const addBookMutation = useMutation({
@@ -49,6 +50,7 @@ const AddBookForm: React.FC = () => {
         price: 0,
         description: "",
       });
+      queryClient.invalidateQueries(['books']); 
     },
     onError: (error) => {
       console.error("Failed to add book", error);
