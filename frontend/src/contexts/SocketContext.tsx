@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { Socket as SocketType } from 'socket.io-client';
 import { Notification, SocketContextType } from '../types/socket.types';
+// @ts-ignore
 import { io } from "socket.io-client";
 
 const SocketContext = createContext<SocketContextType | undefined>(undefined);

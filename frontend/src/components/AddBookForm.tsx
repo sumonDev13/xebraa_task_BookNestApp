@@ -50,7 +50,7 @@ const AddBookForm: React.FC = () => {
         price: 0,
         description: "",
       });
-      queryClient.invalidateQueries(['books']); 
+      queryClient.invalidateQueries({ queryKey: ['books'] });
     },
     onError: (error) => {
       console.error("Failed to add book", error);

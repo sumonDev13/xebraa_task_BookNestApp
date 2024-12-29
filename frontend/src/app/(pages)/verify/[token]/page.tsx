@@ -3,18 +3,16 @@
 import { useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 
-export default function VerifyPage({ 
-  params 
-}: { 
-  params: { token: string } 
-}) {
+export default function VerifyPage({ params }: { params: Promise<{ token: string }> }) {
   const { verifyMagicLink } = useAuth();
 
-  useEffect(() => {
+useEffect(() => {
+  params.then((params) => {
     if (params.token) {
       verifyMagicLink(params.token);
     }
-  }, [params.token]);
+  });
+}, [params]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
