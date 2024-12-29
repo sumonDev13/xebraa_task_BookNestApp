@@ -7,6 +7,7 @@ const authRoutes = require('./routes/auth');
 const booksRoutes = require('./routes/book');
 const socketHandlers = require('./socket/handlers');
 const cors = require("cors");
+const errorHandler = require('./middleware/errorHandlerMiddleware');
 
 
 dotenv.config();
@@ -33,10 +34,11 @@ io.on('connection', (socket) => {
 // Make io accessible to routes
 app.set('io', io);
 
-// Routes
+
 app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/books', booksRoutes);
+app.use(errorHandler.notFound);
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
