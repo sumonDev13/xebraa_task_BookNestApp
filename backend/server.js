@@ -34,6 +34,9 @@ io.on('connection', (socket) => {
 // Make io accessible to routes
 app.set('io', io);
 
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});   
 
 app.use(cors());
 app.use('/api/auth', authRoutes);
