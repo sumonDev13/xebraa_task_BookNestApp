@@ -56,19 +56,6 @@ export default function BookCatalogPage() {
       page: 1,
     }));
   };
-  const handlePopularAuthorsFilter = (authors: string[]) => {
-    setSearchParams((prev) => ({
-      ...prev,
-      authors,
-      page: 1,
-    }));
-  };
-  const handleClearFilters = () => {
-    setSearchParams({
-      page: 1,
-      limit: 10,
-    });
-  };
 
   return (
     <>
@@ -120,15 +107,6 @@ export default function BookCatalogPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="md:col-span-2">
             <BookSearchForm onSearch={handleSearch} />
-          </div>
-          <div>
-            <Button
-              variant="primary"
-              onClick={handleClearFilters}
-              className="w-fit float-end"
-            >
-              Clear Filters
-            </Button>
           </div>
         </div>
         <BookFilters onAveragePriceFilter={handleAveragePriceFilter} />
