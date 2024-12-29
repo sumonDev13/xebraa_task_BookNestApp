@@ -73,7 +73,6 @@ export default function BookCatalogPage() {
               ? "Hide Popular Books"
               : "Show Popular Books by Author"}
           </Button>
-          {/* <h1>Welcome {email}</h1> */}
           <Link href="/books/add">
             <button
               className={`p-2 ${

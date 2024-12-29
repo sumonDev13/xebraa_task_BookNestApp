@@ -8,8 +8,8 @@ export interface Book {
   }
   
   export interface BookSearchParams {
-    title?: string;
-    page?: number;
+  title?: string;
+  page?: number;
   limit?: number;
   search?: string;
   genre?: string;
