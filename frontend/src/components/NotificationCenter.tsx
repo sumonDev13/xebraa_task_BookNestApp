@@ -28,14 +28,9 @@ const NotificationCenter: React.FC = () => {
 
   const unreadCount = notifications.length;
   const {email} = useAuth();
-    const generateUsername = (email: string) => {
-      return email.split('@')[0];
-    };
-  
-    const username = generateUsername(email as string);
 
   return (
-    <div className="relative p-2 flex flex-1 justify-between items-center">
+    <div className="relative p-2 flex flex-1 justify-between">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 rounded-full hover:bg-gray-100 relative transition-colors"
@@ -51,7 +46,7 @@ const NotificationCenter: React.FC = () => {
           </span>
         )}
       </button>
-      <span className="text-xl h-6 ">{username}</span>
+      <span className="text-xl h-6 ">{email}</span>
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">

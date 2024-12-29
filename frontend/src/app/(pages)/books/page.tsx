@@ -65,6 +65,28 @@ export default function BookCatalogPage() {
       <div className="container mx-auto p-4">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-4xl font-bold">Book Catalog</h1>
+          <Button
+            variant="primary"
+            onClick={() => setShowPopularBooks(!showPopularBooks)}
+          >
+            {showPopularBooks
+              ? "Hide Popular Books"
+              : "Show Popular Books by Author"}
+          </Button>
+          {/* <h1>Welcome {email}</h1> */}
+          <Link href="/books/add">
+            <button
+              className={`p-2 ${
+                token
+                  ? "bg-green-500"
+                  : "bg-gray-300 cursor-not-allowed my-anchor-element"
+              } text-white rounded`}
+              disabled={!token}
+            >
+              Add Book
+            </button>
+          </Link>
+          <Tooltip anchorSelect=".my-anchor-element" content="Need to login to add book" />
           {token ? (
             <Button
               variant="secondary"
@@ -89,28 +111,6 @@ export default function BookCatalogPage() {
               </div>
             </Button>
           )}
-          {/* <h1>Welcome {email}</h1> */}
-          <Link href="/books/add">
-            <button
-              className={`p-2 ${
-                token
-                  ? "bg-green-500"
-                  : "bg-gray-300 cursor-not-allowed my-anchor-element"
-              } text-white rounded`}
-              disabled={!token}
-            >
-              Add Book
-            </button>
-          </Link>
-          <Tooltip anchorSelect=".my-anchor-element" content="Need to login to add book" />
-          <Button
-            variant="primary"
-            onClick={() => setShowPopularBooks(!showPopularBooks)}
-          >
-            {showPopularBooks
-              ? "Hide Popular Books"
-              : "Show Popular Books by Author"}
-          </Button>
         </div>
 
         {/* Search and Filtering Section */}
