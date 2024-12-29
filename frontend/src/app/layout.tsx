@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SocketProvider } from "@/contexts/SocketContext";
 import QueryProvider from "@/providers/QueryProvider";
-import NotificationC from "@/components/NoteCenter";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { Toaster } from "react-hot-toast";
 
@@ -36,7 +35,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NotificationC/>
         {children}
       </body>
       </AuthProvider>

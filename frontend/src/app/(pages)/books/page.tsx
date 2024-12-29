@@ -13,6 +13,8 @@ import { PopularAuthorsSection } from "@/components/PopularAuthors";
 import { useAuth } from "@/contexts/AuthContext";
 import { redirect } from "next/navigation";
 import { Tooltip } from "react-tooltip";
+import { BiLogOut } from "react-icons/bi";
+import { HiOutlineLogin } from "react-icons/hi";
 
 export default function BookCatalogPage() {
   const [searchParams, setSearchParams] = useState<BookSearchParams>({
@@ -69,7 +71,11 @@ export default function BookCatalogPage() {
               onClick={handleLogout}
               className="w-fit float-end"
             >
-              Logout
+              <div className="flex flex-1 gap-2">
+              <span><BiLogOut className="w-6 h-6 " /> </span>
+              <span>Logout</span>
+              </div>
+            
             </Button>
           ) : (
             <Button
@@ -77,9 +83,13 @@ export default function BookCatalogPage() {
               onClick={handleLogin}
               className="w-fit float-end"
             >
-              Login
+              <div className="flex flex-1 gap-2">
+              <span><HiOutlineLogin className="w-6 h-6 " /> </span>
+              <span>Login</span>
+              </div>
             </Button>
           )}
+          {/* <h1>Welcome {email}</h1> */}
           <Link href="/books/add">
             <button
               className={`p-2 ${
@@ -94,7 +104,7 @@ export default function BookCatalogPage() {
           </Link>
           <Tooltip anchorSelect=".my-anchor-element" content="Need to login to add book" />
           <Button
-            variant="secondary"
+            variant="primary"
             onClick={() => setShowPopularBooks(!showPopularBooks)}
           >
             {showPopularBooks

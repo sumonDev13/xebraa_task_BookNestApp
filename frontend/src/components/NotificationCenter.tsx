@@ -3,29 +3,39 @@ import React, { useState } from 'react';
 import { Bell, X, WifiOff } from 'lucide-react';
 import { useSocket } from '../contexts/SocketContext';
 import { Notification } from '../types/socket.types';
+import { useAuth } from '@/contexts/AuthContext';
+
 
 interface NotificationItemProps {
   notification: Notification;
 }
 
-const NotificationItem: React.FC<NotificationItemProps> = ({ notification }) => (
+const NotificationItem: React.FC<NotificationItemProps> = ({ notification }) => {
+  const {email} = useAuth();
+  return (
   <div className="p-4 hover:bg-gray-50 transition-colors">
-    <h4 className="font-medium text-gray-900">{notification.title}</h4>
+    <h4 className="font-medium text-gray-900">{notification.title} by {email}</h4>
     <p className="text-sm text-gray-500 mt-1">{notification.message}</p>
     <span className="text-xs text-gray-400 mt-2 block">
       {notification.timestamp.toLocaleString()}
     </span>
   </div>
-);
+);};
 
 const NotificationCenter: React.FC = () => {
   const { notifications, isConnected, clearNotifications } = useSocket();
   const [isOpen, setIsOpen] = useState(false);
 
   const unreadCount = notifications.length;
+  const {email} = useAuth();
+    const generateUsername = (email: string) => {
+      return email.split('@')[0];
+    };
+  
+    const username = generateUsername(email as string);
 
   return (
-    <div className="relative p-2">
+    <div className="relative p-2 flex flex-1 justify-between items-center">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 rounded-full hover:bg-gray-100 relative transition-colors"
@@ -41,6 +51,7 @@ const NotificationCenter: React.FC = () => {
           </span>
         )}
       </button>
+      <span className="text-xl h-6 ">{username}</span>
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
